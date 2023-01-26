@@ -1,0 +1,98 @@
+[
+    {
+        "name": "DVDs",
+        "image_loc": "images/dvd.jpg",
+        "items": [
+            {
+                "name": "Matrix",
+                "description": "Not today Mr.Anderson",
+                "value": 400,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "Short Circuit",
+                "description": "Johnny Five is alive!",
+                "value": 375,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "First Blood",
+                "description": "I could have killed 'em all, I could've killed you. In town you're the law, out here it's me. Don't push it! Don't push it or I'll give you a war you won't believe.",
+                "value": 689,
+                "image_loc": "images/default.png"
+            }
+        ]
+    },
+    {
+        "name": "Board Games",
+        "image_loc": "images/catan.jpg",
+        "items": [
+            {
+                "name": "Catan",
+                "description": "Want some sheep?",
+                "value": 89,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "Catan Seafarer's expansion",
+                "description": "Lets go for the gold!",
+                "value": 23,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "Sorry",
+                "description": "You have to say sorry....",
+                "value": 689,
+                "image_loc": "images/default.png"
+            }
+        ]
+    },
+    {
+        "name": "Beanie Babies",
+        "image_loc": "images/beanie.jpg",
+        "items": [
+            {
+                "name": "Penguin",
+                "description": "Waddle waddle",
+                "value": 3000,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "Elephant",
+                "description": "Such a long trunk",
+                "value": 6000,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "Tiger",
+                "description": "Watch the claws",
+                "value": 4000,
+                "image_loc": "images/default.png"
+            }
+        ]
+    },
+    {
+        "name": "Dinosaurs",
+        "image_loc": "images/dino.png",
+        "items": [
+            {
+                "name": "T-Rex",
+                "description": "Biggest and baddest dino",
+                "value": 8900,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "triceratops",
+                "description": "Little spikey are we?",
+                "value": 7832,
+                "image_loc": "images/default.png"
+            },
+            {
+                "name": "Pterodactyl",
+                "description": "Look to the skies!",
+                "value": 7892,
+                "image_loc": "images/default.png"
+            }
+        ]
+    }
+]
