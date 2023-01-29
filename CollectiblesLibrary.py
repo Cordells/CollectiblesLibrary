@@ -1,10 +1,9 @@
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
 from PIL import ImageTk, Image
 import json
 import os
-import shutil   # shutil and os used together to copy images to image dir
+import shutil  # shutil and os used together to copy images to image dir
 
 
 class CollectiblesEncoder(json.JSONEncoder):
@@ -41,13 +40,6 @@ class CurrentSave:
 
     def remove_item(self, category, item):
         self.collections[category].pop(item)
-
-
-# class Collectible:
-#     def __init__(self, name, image_loc):
-#         self.name = name
-#         self.image_loc = image_loc
-#         self.items = []
 
 
 class Item:
@@ -92,12 +84,13 @@ class LaunchFrame(Frame):
         # menu buttons
         menu_frame = Frame(self, borderwidth=5)
         menu_frame.grid(row=1, columns=1, rowspan=10, sticky=N)
-        Button(menu_frame, text='Add Collection', width=15,
+        Button(menu_frame, text='Add Collection', width=15, background='green',
                command=lambda: parent.change_frame(AddCollectionFrame)).grid(row=1, column=1)
         Button(menu_frame, text='Load User Backup', width=15).grid(row=2, column=1)
-        Button(menu_frame, text='How to Info', width=15).grid(row=3, column=1)
+        Button(menu_frame, text='How to Info', width=15, command=self.show_info).grid(row=3, column=1)
         Button(menu_frame, text='Advanced', width=15).grid(row=4, column=1)
-        Button(menu_frame, text='Save & Exit', width=15, command=main_save.save_and_exit).grid(row=5, column=1)
+        Button(menu_frame, text='Save & Exit', width=15, background='red',
+               command=main_save.save_and_exit).grid(row=5, column=1)
 
         # collectibles frame
         collectible_frame = Frame(self, borderwidth=5)
@@ -112,6 +105,21 @@ class LaunchFrame(Frame):
                    image=photos[len(photos) - 1], compound=TOP,
                    command=lambda i=current_category: parent.change_frame(CollectionFrame, i)).pack(side=RIGHT)
 
+        if not main_save.collections:
+            messagebox.showinfo('Empty Collection', 'If you have a backup save file of all your collections which you '
+                                                    'would like to restore then on the launch screen you can select '
+                                                    'Advanced then load backup.')
+
+    def show_info(self):
+        messagebox.showinfo('How to Info', 'To add a new collection and add new items to that collection.'
+                                           '\n-Select "Add Collection" from the home screen.\n-After the collection is '
+                                           'created you can select it on the home screen.\n-Once in the collection '
+                                           'view select "Add Item", this will populate the current collection with '
+                                           'a new item.\n\nTo remove an item.\n-You must select that item and once in '
+                                           'that view select the "Delete Item" button.\n\nTo remove a collection\n'
+                                           '-In the chosen collection view select the "Delete Collection" button,'
+                                           'this will delete the collection and all items contained within it.')
+
 
 class CollectionFrame(Frame):
     """Opens a view of the chosen collectibles from the launch frame."""
@@ -125,12 +133,12 @@ class CollectionFrame(Frame):
 
         # menu buttons
         menu_frame = Frame(self, borderwidth=5)
-        menu_frame.grid(row=1, columns=1, rowspan=10, sticky=N)
+        menu_frame.grid(row=1, columns=1, rowspan=10, sticky=NW)
         Button(menu_frame, text='Back', width=15,
                command=lambda: parent.change_frame(LaunchFrame)).grid(row=1, column=1)
-        Button(menu_frame, text='Add Item', width=15,
+        Button(menu_frame, text='Add Item', width=15, background='green',
                command=lambda: parent.change_frame(AddItemFrame, category)).grid(row=2, column=1)
-        Button(menu_frame, text='Delete Collection', width=15,
+        Button(menu_frame, text='Delete Collection', width=15, background='red',
                command=lambda: self.verify(parent, category)).grid(row=6, column=1, sticky=S, pady=(100, 0))
 
         # items frame
@@ -159,8 +167,8 @@ class CollectionFrame(Frame):
         main_save.save()
 
     def verify(self, parent, category):
-        verify_collection = messagebox.askyesno('Delete?',
-                                                'Are you sure you want to delete this collection and all items within it?')
+        verify_collection = messagebox.askyesno('Delete?', 'Are you sure you want to delete this collection and all '
+                                                           'items within it?')
         if verify_collection == 1:
             self.delete_collection(parent, category)
 
@@ -184,20 +192,20 @@ class ItemFrame(Frame):
         menu_frame.grid(row=1, columns=1, rowspan=10, sticky=NW)
         Button(menu_frame, text='Back', width=15,
                command=lambda: parent.change_frame(CollectionFrame, category)).grid(row=1, column=1)
-        Button(menu_frame, text='Save Changes', width=15).grid(row=2, column=1)
-        Button(menu_frame, text='Delete Item', width=15, command=self.verify).grid(row=3, column=1,
-                                                                                   sticky=N, pady=(100, 0))
+        Button(menu_frame, text='Save Changes', background='green', width=15).grid(row=2, column=1)
+        Button(menu_frame, text='Delete Item', width=15, background='red',
+               command=self.verify).grid(row=3, column=1, sticky=N, pady=(100, 0))
 
         # item info frame
         info_frame = Frame(self, borderwidth=5)
         info_frame.grid(row=2, column=2)
 
-        Label(info_frame, text=item['name'], font=10).grid(row=2, column=1, sticky=NW)
-        Label(info_frame, text=item['description'], wraplength=200, font=10).grid(row=3, column=1, sticky=NW)
-        Label(info_frame, text=item['value'], font=10).grid(row=4, column=1, sticky=NW)
+        Label(info_frame, text=item['name'], font=10).grid(row=1, column=1, sticky=NW)
+        Label(info_frame, text=item['description'], wraplength=500, font=10).grid(row=2, column=1, sticky=NW)
+        Label(info_frame, text=item['value'], font=10).grid(row=3, column=1, sticky=NW)
         photos = main_save.thumbnails
-        photos.append(ImageTk.PhotoImage(Image.open(item['image_loc']).resize((400, 400))))
-        Label(info_frame, image=photos[0]).grid(row=1, column=1, sticky=NW)
+        photos.append(ImageTk.PhotoImage(Image.open(item['image_loc']).resize((50, 50))))  # TODO: fix this image sizing
+        Label(info_frame, image=photos[0]).grid(row=2, column=2, sticky=NW)
 
     def delete_item(self):
         self.category['items'].pop(self.item['name'])
@@ -224,11 +232,11 @@ class AddItemFrame(Frame):
         Label(self, text=current_category).grid(row=1, column=2, padx=5, pady=5, columnspan=8, sticky=EW)
 
         # menu buttons
-        menu_frame = Frame(self)
-        menu_frame.grid(row=1, columns=1, rowspan=10)
+        menu_frame = Frame(self, borderwidth=5)
+        menu_frame.grid(row=1, columns=1, rowspan=10, sticky=NW)
         Button(menu_frame, text='Back', width=15,
                command=lambda: parent.change_frame(CollectionFrame, category)).grid(row=1, column=1)
-        Button(menu_frame, text='Save Changes', width=15,
+        Button(menu_frame, text='Save Changes', width=15, background='green',
                command=lambda: self.save_back(parent, category)).grid(row=2, column=1)
 
         # creation frame
@@ -282,11 +290,11 @@ class AddCollectionFrame(Frame):
         Label(self, text=text_to_label, font=50).grid(row=1, column=2, padx=5, pady=5, columnspan=8, sticky=EW)
 
         # menu buttons
-        menu_frame = Frame(self)
-        menu_frame.grid(row=1, columns=1, rowspan=10)
+        menu_frame = Frame(self, borderwidth=5)
+        menu_frame.grid(row=1, columns=1, rowspan=10, sticky=NW)
         Button(menu_frame, text='Back', width=15,
                command=lambda: parent.change_frame(LaunchFrame)).grid(row=1, column=1)
-        Button(menu_frame, text='Save Changes', width=15,
+        Button(menu_frame, text='Save Changes', width=15, background='green',
                command=lambda: self.save_back(parent)).grid(row=2, column=1)
 
         # creation frame

@@ -29,7 +29,7 @@
             },
             "George of the Jungle": {
                 "name": "George of the Jungle",
-                "description": "ahahahaah",
+                "description": "To swing or not to swing?",
                 "value": 33,
                 "image_loc": "images/default.png"
             }
@@ -40,9 +40,21 @@
         "image_loc": "images/default.png",
         "items": {}
     },
-    "Balloons": {
-        "name": "Balloons",
-        "image_loc": "images/default.png",
+    "Beanie Babies": {
+        "name": "Beanie Babies",
+        "image_loc": "images/beanie.jpg",
+        "items": {
+            "asdf": {
+                "name": "asdf",
+                "description": "sdf",
+                "value": 56,
+                "image_loc": "images/default.png"
+            }
+        }
+    },
+    "Board Games": {
+        "name": "Board Games",
+        "image_loc": "images/catan.jpg",
         "items": {}
     }
 }

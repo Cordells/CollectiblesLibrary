@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b16dc4b-d2fb-4c8e-af6e-9000b7874679" name="Changes" comment="">
+    <list default="true" id="9b16dc4b-d2fb-4c8e-af6e-9000b7874679" name="Changes" comment="add/remove collection and add/remove item implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CollectiblesLibrary.py" beforeDir="false" afterPath="$PROJECT_DIR$/CollectiblesLibrary.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_save.json" beforeDir="false" afterPath="$PROJECT_DIR$/main_save.json" afterDir="false" />
@@ -75,6 +75,14 @@
       <option name="presentableId" value="Default" />
       <updated>1674583959225</updated>
     </task>
+    <task id="LOCAL-00001" summary="add/remove collection and add/remove item implemented">
+      <created>1674774710765</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674774710765</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,5 +95,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add/remove collection and add/remove item implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="add/remove collection and add/remove item implemented" />
   </component>
 </project>
