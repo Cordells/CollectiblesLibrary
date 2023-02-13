@@ -1,7 +1,11 @@
-# Example call to tally microservice
-# Connects REQ socket to tcp://localhost:5555
-# Sends request containing python dictionary of collectable items to server, 
-#   expects python dictionary containing: 
+# Title: Example Call to Tally Microservice
+# Author: Jessica Allman-LaPorte
+# GitHub: JessA-L
+# Date: 2/13/2023
+# Description:
+#   Example call to TallyMicroservice.py
+#   Sends request containing python dictionary of collectable items to server
+#   Expects python dictionary containing: 
 #     1) the total value of each category and 
 #     2) the total value of entire collection
 

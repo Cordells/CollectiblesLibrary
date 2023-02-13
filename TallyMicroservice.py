@@ -1,17 +1,18 @@
-# Tally Microservice
-# Binds REP socket to tcp://*:5555
-# Expects request containing python dictionary of collectable items to server, 
-#   sends python dictionary containing:
+# Title: Tally Microservice
+# Author: Jessica Allman-LaPorte
+# GitHub: JessA-L
+# Date: 2/13/2023
+# Description:
+#   Expects request containing python dictionary of collectable items to server
+#   Sends python dictionary containing:
 #     1) the total value of each category and 
 #     2)   the total value of entire collection
-# 
 
 import zmq
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)
 socket.bind("tcp://*:5555")
-
 
 while True:
     # Wait for next request from client
