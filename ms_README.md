@@ -99,6 +99,10 @@ cat_values =
 
 ## UML Sequence Diagram
 
+ ![UML](totalUML.png)
+ 
+ [*Made with Visual Paradigm*](https://online.visual-paradigm.com/diagrams/solutions/free-uml-tool/)
+
 ## Contact
 
 <!-- TODO: Include icons and links to your RELEVANT, PROFESSIONAL 'DEV-ORIENTED' social media. -->
