@@ -64,25 +64,37 @@ collect_dict =
                 {'name': 'Matrix', 
                 'description': 'Not today Mr.Anderson', 
                 'value': 400, 
-                'image_loc': 
-                'images/default.png'
+                'image_loc': 'images/default.png'
             }
         }
     }
 ```
-
+e.g. using main_save.json:
 ```
-# Make a request containing a python dictionary
+with open('main_save.json', 'r') as infile:
+    collect_dict = json.load(infile)
+```
+#### Make the request:
+```
 print(f"Sending request for total…")
 socket.send_json(collect_dict)
 ```
 
 
 ### Receiving Data
+#### Request reply:
 ```
-# Get the reply as a python dictionary
 cat_values = socket.recv_json()
 print(f"Received total: {cat_values}")
+```
+#### Reply received in following dictionary format:
+```
+cat_values = 
+    {
+        'Category1': 32985,
+        'Category2': 32985,
+        'Total': 33041
+    }
 ```
 
 ## UML Sequence Diagram
