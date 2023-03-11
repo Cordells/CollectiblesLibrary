@@ -31,7 +31,6 @@ while True:
     # Add total value of all categories
     cat_values["Total"] = total_value
 
-
     # Send reply back to client
     socket.send_json(cat_values)
     print(f"sending {cat_values}...")

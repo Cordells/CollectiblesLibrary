@@ -7,13 +7,13 @@
                 "name": "Matrix",
                 "description": "Not today Mr.Anderson",
                 "value": 400,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dvd.jpg"
             },
             "Short Circuit": {
                 "name": "Short Circuit",
                 "description": "Johnny Five is alive!",
                 "value": 32132,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dvd.jpg"
             },
             "First Blood": {
                 "name": "First Blood",
@@ -32,22 +32,23 @@
                 "description": "To swing or not to swing?",
                 "value": 33,
                 "image_loc": "images/default.png"
+            },
+            "werwerew": {
+                "name": "werwerew",
+                "description": "",
+                "value": 0,
+                "image_loc": "images/default.png"
             }
         }
-    },
-    "Dinos": {
-        "name": "Dinos",
-        "image_loc": "images/default.png",
-        "items": {}
     },
     "Beanie Babies": {
         "name": "Beanie Babies",
         "image_loc": "images/beanie.jpg",
         "items": {
-            "asdf": {
-                "name": "asdf",
-                "description": "sdf",
-                "value": 56,
+            "Cat": {
+                "name": "Cat",
+                "description": "Meow meow",
+                "value": 345,
                 "image_loc": "images/default.png"
             }
         }
@@ -55,6 +56,34 @@
     "Board Games": {
         "name": "Board Games",
         "image_loc": "images/catan.jpg",
+        "items": {
+            "catan": {
+                "name": "catan",
+                "description": "asdfsdf",
+                "value": 34,
+                "image_loc": "images/default.png"
+            },
+            "Sorry": {
+                "name": "Sorry",
+                "description": "Feels bad",
+                "value": 89,
+                "image_loc": "images/default.png"
+            }
+        }
+    },
+    "asdf": {
+        "name": "asdf",
+        "image_loc": "images/default.png",
+        "items": {}
+    },
+    "xcv": {
+        "name": "xcv",
+        "image_loc": "images/default.png",
+        "items": {}
+    },
+    "cvb": {
+        "name": "cvb",
+        "image_loc": "images/default.png",
         "items": {}
     }
 }
