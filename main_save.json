@@ -12,32 +12,32 @@
             "Short Circuit": {
                 "name": "Short Circuit",
                 "description": "Johnny Five is alive!",
-                "value": 32132,
+                "value": 20,
                 "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dvd.jpg"
             },
             "First Blood": {
                 "name": "First Blood",
                 "description": "I could have killed 'em all, I could've killed you. In town you're the law, out here it's me. Don't push it! Don't push it or I'll give you a war you won't believe.",
                 "value": 400,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dvd.jpg"
             },
             "Indian in the Cupboard": {
                 "name": "Indian in the Cupboard",
                 "description": "Great childhood movie",
                 "value": 20,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dvd.jpg"
             },
             "George of the Jungle": {
                 "name": "George of the Jungle",
                 "description": "To swing or not to swing?",
                 "value": 33,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dvd.jpg"
             },
-            "werwerew": {
-                "name": "werwerew",
-                "description": "",
-                "value": 0,
-                "image_loc": "images/default.png"
+            "Galaxy Quest": {
+                "name": "Galaxy Quest",
+                "description": "Never give up, never surrender!",
+                "value": 500,
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/dino.png"
             }
         }
     },
@@ -45,11 +45,11 @@
         "name": "Beanie Babies",
         "image_loc": "images/beanie.jpg",
         "items": {
-            "Cat": {
-                "name": "Cat",
-                "description": "Meow meow",
+            "Dog": {
+                "name": "Dog",
+                "description": "Bark!",
                 "value": 345,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/beanie.jpg"
             }
         }
     },
@@ -57,33 +57,33 @@
         "name": "Board Games",
         "image_loc": "images/catan.jpg",
         "items": {
-            "catan": {
-                "name": "catan",
-                "description": "asdfsdf",
-                "value": 34,
-                "image_loc": "images/default.png"
-            },
             "Sorry": {
                 "name": "Sorry",
                 "description": "Feels bad",
                 "value": 89,
-                "image_loc": "images/default.png"
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/default.png"
+            },
+            "Catan": {
+                "name": "Catan",
+                "description": "Sheep?",
+                "value": 34,
+                "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/catan.jpg"
             }
         }
     },
-    "asdf": {
-        "name": "asdf",
-        "image_loc": "images/default.png",
+    "Test Collection": {
+        "name": "Test Collection",
+        "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/default.png",
         "items": {}
     },
-    "xcv": {
-        "name": "xcv",
-        "image_loc": "images/default.png",
+    "Test Collection 2": {
+        "name": "Test Collection 2",
+        "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/default.png",
         "items": {}
     },
-    "cvb": {
-        "name": "cvb",
-        "image_loc": "images/default.png",
+    "Test": {
+        "name": "Test",
+        "image_loc": "C:/Users/Cord/Documents/OSU Classes/Winter 2023/CS 361 Software Engineering 1/CollectiblesLibrary/images/default.png",
         "items": {}
     }
 }

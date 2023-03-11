@@ -5,7 +5,6 @@ from PIL import ImageTk, Image
 import json
 import os
 import zmq
-# import shutil  # shutil and os used together to copy images to image dir
 
 
 class CollectiblesEncoder(json.JSONEncoder):
@@ -23,14 +22,12 @@ class CurrentSave:
         self.values = {}
 
     def save_and_exit(self):
-        self.total_values()
         json_object = json.dumps(self.collections, indent=4, cls=CollectiblesEncoder)
         with open('main_save.json', 'w') as outfile:
             outfile.write(json_object)
         gui.destroy()
 
     def save(self):
-        self.total_values()
         json_object = json.dumps(self.collections, indent=4, cls=CollectiblesEncoder)
         with open('main_save.json', 'w') as outfile:
             outfile.write(json_object)
@@ -43,7 +40,6 @@ class CurrentSave:
                 self.collections = parsed_json
         else:
             self.save()
-        self.total_values()
 
     def remove_item(self, category, item):
         self.collections[category].pop(item)
@@ -57,11 +53,16 @@ class CurrentSave:
 
         # send request to TotalMicroservice
         socket.send_json(self.collections)
-
-        # get the reply
-        values = socket.recv_json()
-        if values:
-            self.values = values
+        values = {}
+        socket.setsockopt(zmq.LINGER, 100)
+        poller = zmq.Poller()
+        poller.register(socket, zmq.POLLIN)
+        if poller.poll(100):
+            try:
+                values = socket.recv_json(flags=zmq.NOBLOCK)
+            except zmq.ZMQError:
+                socket.close()
+        self.values = values
 
 
 class StartGUI(Tk):
@@ -90,7 +91,6 @@ class LaunchFrame(Frame):
     """frame which program starts with to present all available collections"""
 
     def __init__(self, parent):
-        # Launch frame
         Frame.__init__(self, parent)
         Frame(parent, borderwidth=5, relief="groove")
         self.parent = parent
@@ -151,12 +151,15 @@ class LaunchFrame(Frame):
         messagebox.showinfo(self.show_info_1, self.show_info_2)
 
     def show_values(self):
+        self.main_save.total_values()
         message = ""
         if self.main_save.values:
             for category in self.main_save.values:
                 if category != 'Total':
                     message = message + category + ' value: $' + str(self.main_save.values[category]) + '\n'
             message = message + 'Total value of collections: $' + str(self.main_save.values['Total'])
+        if message == "":
+            message = "Value not returned from microservice..."
         messagebox.showinfo('Collection Values', message)
 
 
@@ -164,7 +167,6 @@ class CollectionFrame(Frame):
     """Opens a view of the chosen collectibles from the launch frame."""
 
     def __init__(self, parent, category):
-        # Collection frame
         Frame.__init__(self, parent)
         self.parent = parent
         self.main_save = parent.main_save
@@ -175,7 +177,7 @@ class CollectionFrame(Frame):
         # menu buttons
         menu_frame = Frame(self, borderwidth=5)
         menu_frame.grid(row=1, columns=1, rowspan=10, sticky=NW)
-        Button(menu_frame, text='Back', width=15,
+        Button(menu_frame, text='Back', width=15, justify=LEFT,
                command=lambda: parent.change_frame(LaunchFrame)).grid(row=1, column=1)
         Button(menu_frame, text='Add Item', width=15, background='green',
                command=lambda: parent.change_frame(AddItemFrame, category)).grid(row=2, column=1)
@@ -184,7 +186,7 @@ class CollectionFrame(Frame):
 
         # items frame
         items_frame = Frame(self, borderwidth=5)
-        items_frame.grid(row=2, column=2, columnspan=8, rowspan=8)
+        items_frame.grid(row=2, column=2, columnspan=8, rowspan=8, sticky=NW)
 
         self.load_items(category, items_frame)
 
@@ -201,9 +203,9 @@ class CollectionFrame(Frame):
             photos.append(ImageTk.PhotoImage(Image.open(current_item['image_loc']).resize((100, 100))))
             Button(items_frame,
                    text=current_item['name'], padx=5, pady=5, wraplength=100, width=120, height=140,
-                   image=photos[len(photos) - 1], compound=TOP,
+                   image=photos[len(photos) - 1], compound=TOP, justify=LEFT,
                    command=lambda i=current_item:
-                   parent.change_frame(ItemFrame, category, i)).grid(row=row_count, column=column_count)
+                   parent.change_frame(ItemFrame, category, i)).grid(row=row_count, column=column_count, sticky=NW)
             index_counter += 1
             if column_count == 5:
                 row_count += 1
@@ -224,10 +226,9 @@ class CollectionFrame(Frame):
 
 
 class ItemFrame(Frame):
-    """Opens a view of the chosen collectibles from the launch frame."""
+    """Opens a view of the chosen item from a collection."""
 
     def __init__(self, parent, category, item):
-        # Collection frame
         Frame.__init__(self, parent)
 
         self.parent = parent
@@ -252,13 +253,14 @@ class ItemFrame(Frame):
         info_frame = Frame(self, borderwidth=5)
         info_frame.grid(row=2, column=2)
 
-        Label(info_frame, text=item['name'], font=10).grid(row=1, column=1, sticky=NW)
-        Label(info_frame, text=item['description'], wraplength=500, font=10).grid(row=2, column=1, sticky=NW)
-        Label(info_frame, text=item['value'], font=10).grid(row=3, column=1, sticky=NW)
-
         photo = parent.main_save.current_thumbnail
         photo[0] = (ImageTk.PhotoImage(Image.open(item['image_loc']).resize((200, 200))))
-        Label(info_frame, image=photo[0]).grid(row=2, column=2, sticky=NW)
+        Label(info_frame, image=photo[0]).grid(row=1, column=1, sticky=NW)
+
+        Label(info_frame, text='Name: ' + item['name'], font=10, wraplength=500).grid(row=2, column=1, sticky=NW)
+        Label(info_frame, text='Description: ' + item['description'], wraplength=500, font=10,
+              justify=LEFT).grid(row=3, column=1, sticky=NW)
+        Label(info_frame, text='Value: ' + str(item['value']), font=10).grid(row=4, column=1, sticky=NW)
 
     def delete_item(self):
         self.category['items'].pop(self.item['name'])
@@ -272,10 +274,9 @@ class ItemFrame(Frame):
 
 
 class AddCollectionFrame(Frame):
-    """Opens a view to add a collectible to the launch frame."""
+    """Opens a view to add a collection to the launch frame."""
 
     def __init__(self, parent):
-        # Collection frame
         Frame.__init__(self, parent)
 
         self.parent = parent
@@ -328,10 +329,9 @@ class AddCollectionFrame(Frame):
 
 
 class AddItemFrame(Frame):
-    """Opens a view to add an item to the passed category."""
+    """Opens a view to add an item to the current category."""
 
     def __init__(self, parent, category):
-        # Collection frame
         Frame.__init__(self, parent)
 
         self.parent = parent
@@ -417,10 +417,9 @@ class AddItemFrame(Frame):
 
 
 class EditItemFrame(Frame):
-    """Opens a view to add an item to the passed category."""
+    """Opens a view to edit an item from said item frame."""
 
     def __init__(self, parent, category, item):
-        # Collection frame
         Frame.__init__(self, parent)
 
         self.parent = parent
@@ -428,7 +427,7 @@ class EditItemFrame(Frame):
         self.item = item
         self.main_save = parent.main_save
 
-        current_category = "You are currently editing item : " + category['name']
+        current_category = "You are currently editing item in: " + category['name']
         Label(self, text=current_category, font=50).grid(row=1, column=2, padx=5, pady=5, columnspan=8, sticky=NW)
 
         # menu buttons
